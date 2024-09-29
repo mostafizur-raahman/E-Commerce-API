@@ -22,23 +22,20 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
         // Upload each image to Cloudinary
         const uploadPromises = files.images.map((file: Express.Multer.File) => {
             return cloudinary.uploader.upload(file.path, {
-                folder: "ecommerce-api", // Specify the folder in Cloudinary
+                folder: "ecommerce-api",
             });
         });
 
-        // Wait for all uploads to complete
         const uploadResults = await Promise.all(uploadPromises);
 
         // Extract URLs from the upload results
         const imageUrls = uploadResults.map(result => result.secure_url);
 
-        // Create product object with uploaded image URLs
         const productData = {
             ...product,
-            images: imageUrls, // Add the uploaded image URLs
+            images: imageUrls,
         };
 
-        // Save product data to the database using productServices
         const result = await productServices.productCreateIntoDB(productData);
 
         res.status(201).json({
