@@ -16,7 +16,10 @@ const config = {
     port: getEnvVariable("PORT", "3000"),
     db_url: getEnvVariable("DATABASE_URL"),
     jwt_secret: getEnvVariable("JWT_SECRET"),
-    jwt_ttl: getEnvVariable("JWT_TTL")
+    jwt_ttl: getEnvVariable("JWT_TTL"),
+    cloudinary_secret: getEnvVariable("CLOUDINARY_SECRET"),
+    clodinary_api_key: getEnvVariable("CLOUDINARY_API_KEY"),
+    clodinary_api_name: getEnvVariable("CLOUDINARY_API_NAME")
 };
 
 export default config;
